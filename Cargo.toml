@@ -1,0 +1,46 @@
+[package]
+name = "clickhouse-bb8"
+version = "0.1.0"
+edition = "2024"
+authors = ["David Calavera <david@calavera.dev>"]
+description = "ClickHouse client pool manager compatible with BB8"
+repository = "https://github.com/calavera/clickhouse-bb8"
+homepage = "https://github.com/calavera/clickhouse-bb8"
+documentation = "https://docs.rs/clickhouse-bb8"
+license = "MIT"
+keywords = ["clickhouse", "pool", "bb8", "database"]
+categories = ["database"]
+readme = "README.md"
+rust-version = "1.89.0"
+
+[dependencies]
+bb8 = "0.8"
+clickhouse = "0.14.1"
+async-trait = "0.1"
+thiserror = "1.0"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
+
+[features]
+default = ["lz4"]
+
+test-util = ["clickhouse/test-util"]
+inserter = ["clickhouse/inserter"]
+uuid = ["clickhouse/uuid"]
+time = ["clickhouse/time"]
+lz4 = ["clickhouse/lz4"]
+chrono = ["clickhouse/chrono"]
+futures03 = ["clickhouse/futures03"]
+
+# TLS
+native-tls = ["clickhouse/native-tls"]
+rustls-tls = ["clickhouse/rustls-tls"]
+rustls-tls-aws-lc = ["clickhouse/rustls-tls-aws-lc"]
+rustls-tls-ring = ["clickhouse/rustls-tls-ring"]
+rustls-tls-webpki-roots = ["clickhouse/rustls-tls-webpki-roots"]
+rustls-tls-native-roots = ["clickhouse/rustls-tls-native-roots"]
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
